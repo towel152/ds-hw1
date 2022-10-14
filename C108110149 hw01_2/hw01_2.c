@@ -15,7 +15,6 @@ int avail=0;
 void printPoly(int n)
 {/*print the polynomial*/
 	int i=0, p=0;
-//	printf("avail=%d\n", avail);
 	p=avail-n-1;
 	for(i=n; i<avail; i++){
 		if(terms[i].coef == 0){
@@ -41,9 +40,6 @@ void attach(float coefficient, int exponent){
 	}
 	terms[avail].coef = coefficient;
 	terms[avail].expon = exponent;
-//	printf("avail_attach=%d\n", avail);
-//	printf("coef_attach=%f\n", terms[avail].coef);
-//	printf("expon_attach=%d\n", terms[avail].expon);
 	avail++;
 }
 
@@ -76,21 +72,15 @@ void padd(int n){
 			
 			for(k=0; k<c; k++){
 				coefficient=terms[j].coef+terms[++j].coef;
-//				printf("coefficient1=%f\n", coefficient);
 				j++;
 			}
-//			printf("coefficient_total=%f\n", coefficient);
-//			printf("expon=%d\n", expon);
 			attach(coefficient, expon); 
-//			printf("c=%d\n", c);
 		}
 		else{
 			attach(terms[i].coef, terms[i].expon);
 		}
 	}
 }
-
-
 
 void sort(int n){
 	int i=0, j=0, tmp_expon=0, tmp_coef=0;
@@ -125,6 +115,7 @@ void readPoly(int n)
 	}
 	//先大到小排序 
 	sort(n);
+	//進行相加
 	padd(n);
 }
 
