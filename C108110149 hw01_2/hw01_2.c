@@ -15,6 +15,7 @@ int avail=0;
 void printPoly(int n)
 {/*print the polynomial*/
 	int i=0, p=0;
+	//計算總共有幾個+
 	p=avail-n-1;
 	for(i=n; i<avail; i++){
 		if(terms[i].coef == 0){
@@ -34,6 +35,7 @@ void printPoly(int n)
 	
 }
 
+//加入到最後方
 void attach(float coefficient, int exponent){
 	if(avail >= MAX_TERMS){
 		printf("Too many terms in the polynomial\n");
@@ -43,6 +45,7 @@ void attach(float coefficient, int exponent){
 	avail++;
 }
 
+//計算出現幾次
 int count(int n, int index){
 	int i = 0, count=0;
 	for(i = 0; i < n; i++){
@@ -53,6 +56,7 @@ int count(int n, int index){
 	return count;
 }
 
+//將同級的相加
 void padd(int n){
 	int i=0, j=0, c=0, k=0, expon=0;
 	float coefficient=0;
@@ -62,10 +66,13 @@ void padd(int n){
 		expon=terms[i].expon;
 		c=count(n, i);
 		if(c>1){
+			//避免重複相加 跳過已經加過的index
 			i=i+c-1;
+			//相同的數目為偶數
 			if(c%2==0){
 				c=c/2;	
 			}
+			//相同的數目為奇數
 			else{
 				c=(c/2)+1;
 			}
@@ -82,6 +89,7 @@ void padd(int n){
 	}
 }
 
+//氣泡排序
 void sort(int n){
 	int i=0, j=0, tmp_expon=0, tmp_coef=0;
 	for(i=0; i<n; i++){
@@ -101,8 +109,9 @@ void sort(int n){
 
 void readPoly(int n)
 {/*read in a polynomial*/
-	int i=0, j=0, exponent=0, c=0;
+	int i=0, j=0, exponent=0;
 	float coefficient=0;
+	//avail表示n+1的index
 	avail=n;
 	for(i=0; i<n; i++){
 		printf("Exponent: ");
@@ -113,6 +122,7 @@ void readPoly(int n)
 		terms[j].expon = exponent;
 		j++;
 	}
+
 	//先大到小排序 
 	sort(n);
 	//進行相加
